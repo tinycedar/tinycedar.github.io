@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Daniel&#39;s blog</title>
+    <link>http://tinycedar.com/tags/</link>
+    <description>Recent content in Tags on Daniel&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 20 Jul 2016 02:16:04 +0800</lastBuildDate>
+    
+	<atom:link href="http://tinycedar.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git</title>
+      <link>http://tinycedar.com/tags/Git/</link>
+      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/tags/Git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitHub</title>
+      <link>http://tinycedar.com/tags/GitHub/</link>
+      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/tags/GitHub/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://tinycedar.com/tags/Hugo/</link>
+      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/tags/Hugo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

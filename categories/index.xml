@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Daniel&#39;s blog</title>
+    <link>http://tinycedar.com/categories/</link>
+    <description>Recent content in Categories on Daniel&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 20 Jul 2016 02:16:04 +0800</lastBuildDate>
+    
+	<atom:link href="http://tinycedar.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>10000 Hours</title>
+      <link>http://tinycedar.com/categories/10000-Hours/</link>
+      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/categories/10000-Hours/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>环境搭建</title>
+      <link>http://tinycedar.com/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
