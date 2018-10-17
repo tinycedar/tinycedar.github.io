@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tinycedar.com/post/2017/10/27/build-your-own-blog1/</loc>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</loc>
     <lastmod>2018-10-18T03:29:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -11,7 +18,7 @@
   
   <url>
     <loc>http://tinycedar.com/categories/10000-Hours/</loc>
-    <lastmod>2018-10-18T03:29:53+08:00</lastmod>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -25,14 +32,14 @@
   
   <url>
     <loc>http://tinycedar.com/categories/</loc>
-    <lastmod>2018-10-18T03:29:53+08:00</lastmod>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/</loc>
-    <lastmod>2018-10-18T03:29:53+08:00</lastmod>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -59,6 +66,20 @@
   </url>
   
   <url>
+    <loc>http://tinycedar.com/tags/IO/</loc>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tinycedar.com/tags/Java/</loc>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tinycedar.com/links/</loc>
     <lastmod>2018-10-18T03:28:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -67,7 +88,7 @@
   
   <url>
     <loc>http://tinycedar.com/post/</loc>
-    <lastmod>2018-10-18T03:29:53+08:00</lastmod>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -80,8 +101,22 @@
   </url>
   
   <url>
+    <loc>http://tinycedar.com/tags/Tomcat/</loc>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tinycedar.com/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2018-10-18T03:29:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tinycedar.com/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2018-10-18T03:51:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

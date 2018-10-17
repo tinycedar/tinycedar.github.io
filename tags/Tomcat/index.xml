@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Daniel&#39;s blog</title>
-    <link>http://tinycedar.com/post/</link>
-    <description>Recent content in Posts on Daniel&#39;s blog</description>
+    <title>Tomcat on Daniel&#39;s blog</title>
+    <link>http://tinycedar.com/tags/Tomcat/</link>
+    <description>Recent content in Tomcat on Daniel&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 27 Oct 2017 02:34:08 +0800</lastBuildDate>
     
-	<atom:link href="http://tinycedar.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://tinycedar.com/tags/Tomcat/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://tinycedar.com/post/2017/10/27/build-your-own-blog1/</guid>
       <description>最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w</description>
-    </item>
-    
-    <item>
-      <title>GitHub &#43; Hugo 搭建个人博客</title>
-      <link>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</link>
-      <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
-      
-      <guid>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</guid>
-      <description>更新： 2018-05-26：主题换成 Even，补充多处内容。 2018-02-11：主题换成 Kiera。 自己搭博客的N个理由 你的笔记非常值钱，</description>
     </item>
     
   </channel>
