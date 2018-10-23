@@ -17,7 +17,7 @@
       <pubDate>Fri, 27 Oct 2017 02:34:08 +0800</pubDate>
       
       <guid>http://tinycedar.com/post/2017/10/27/bio-vs-nio-vs-aio/</guid>
-      <description>最近我在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet</description>
+      <description>最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w</description>
     </item>
     
   </channel>

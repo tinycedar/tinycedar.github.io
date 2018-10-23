@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tinycedar.com/post/2018/10/09/zhoushan-travel/</loc>
+    <lastmod>2018-10-23T19:43:14+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://tinycedar.com/post/2017/10/27/bio-vs-nio-vs-aio/</loc>
     <lastmod>2018-10-18T16:22:59+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -39,7 +46,7 @@
   
   <url>
     <loc>http://tinycedar.com/</loc>
-    <lastmod>2018-10-18T16:22:59+08:00</lastmod>
+    <lastmod>2018-10-23T19:43:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -88,7 +95,7 @@
   
   <url>
     <loc>http://tinycedar.com/post/</loc>
-    <lastmod>2018-10-18T16:22:59+08:00</lastmod>
+    <lastmod>2018-10-23T19:43:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

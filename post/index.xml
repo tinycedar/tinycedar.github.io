@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Daniel&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Oct 2017 02:34:08 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Oct 2018 14:16:04 +0800</lastBuildDate>
     
 	<atom:link href="http://tinycedar.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>十月舟山团建行程</title>
+      <link>http://tinycedar.com/post/2018/10/09/zhoushan-travel/</link>
+      <pubDate>Tue, 09 Oct 2018 14:16:04 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/post/2018/10/09/zhoushan-travel/</guid>
+      <description>行程日期 10.19（周五）自驾出发 10.20（周六）岛上游玩 10.21（周日）下午返程 重要说明 如果风大无船，延后出行。一般提前一周基本能确定</description>
+    </item>
     
     <item>
       <title>BIO vs NIO vs AIO</title>
@@ -17,7 +26,7 @@
       <pubDate>Fri, 27 Oct 2017 02:34:08 +0800</pubDate>
       
       <guid>http://tinycedar.com/post/2017/10/27/bio-vs-nio-vs-aio/</guid>
-      <description>最近我在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet</description>
+      <description>最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w</description>
     </item>
     
     <item>
