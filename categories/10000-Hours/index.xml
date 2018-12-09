@@ -6,10 +6,19 @@
     <description>Recent content in 10000 Hours on Daniel&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 27 Oct 2017 02:34:08 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Dec 2018 15:09:26 +0800</lastBuildDate>
     
 	<atom:link href="http://tinycedar.com/categories/10000-Hours/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018 12 09 Jvm Gc Optimization</title>
+      <link>http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/</link>
+      <pubDate>Sun, 09 Dec 2018 15:09:26 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/</guid>
+      <description>JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java</description>
+    </item>
     
     <item>
       <title>BIO vs NIO vs AIO</title>
