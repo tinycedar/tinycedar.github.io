@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Daniel Lin" />
-  <meta name="description" content="JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java" />
+  <meta name="description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦" />
 
   <meta name="keywords" content="load testing, tuning, 性能测试, 调优" />
 
@@ -50,25 +50,25 @@
 
 
 <meta property="og:title" content="浅谈JVM GC调优" />
-<meta property="og:description" content="JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java" />
+<meta property="og:description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/" /><meta property="article:published_time" content="2018-12-09T15:09:26&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-09T15:13:08&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-11T19:09:47&#43;08:00"/>
 
 <meta itemprop="name" content="浅谈JVM GC调优">
-<meta itemprop="description" content="JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java">
+<meta itemprop="description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦">
 
 
 <meta itemprop="datePublished" content="2018-12-09T15:09:26&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-09T15:09:26&#43;08:00" />
-<meta itemprop="wordCount" content="1987">
+<meta itemprop="wordCount" content="2064">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="浅谈JVM GC调优"/>
-<meta name="twitter:description" content="JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java"/>
+<meta name="twitter:description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -144,8 +144,8 @@
               <a href="/categories/10000-Hours/"> 10000 Hours </a>
             
           </div>
-        <span class="more-meta"> 约 1987 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 2064 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -196,11 +196,11 @@
     <div class="post-content">
       
 
-<p>JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java程序员的梦魇，也成了C/C++/Rust开发者嘲笑Java的黑点。无数次我梦想Azul家的C4算法能开源，但那毕竟是别人家的核心技术和摇钱树。终于ZGC出现了，几乎和C4一模一样的算法实现&hellip;&hellip;在等待ZGC变成stable的这段时间里，我们没办法还得老实调优GC。</p>
+<p>JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦魇，也成了C/C++/Rust开发者嘲笑Java的黑点。无数次我梦想Azul家的C4算法能开源，但那可是人家的核心技术和摇钱树。终于ZGC出现了，几乎和C4一模一样的算法实现&hellip;&hellip;在等待ZGC变成stable的这段时间里，我们没办法还得老实调优GC。</p>
 
 <h2 id="先看效果">先看效果</h2>
 
-<p>XX系统，做为XXXX部门<strong>最底层</strong>、<strong>流量最大</strong>的应用，接口RT(响应时间)的重要性显而易见；而影响RT稳定性的众多因素里，GC STW（Stop The World）引起的暂停时间或许是最容易被忽视的。下图是Young GC暂停时间优化前后对比，从<strong>60ms左右</strong> 降到了<strong>10ms左右</strong>。</p>
+<p>XX系统，做为XXXX部门<strong>最底层</strong>、<strong>流量最大</strong>的应用，接口RT(响应时间)的重要性显而易见；而影响RT稳定性的众多因素里，GC STW（Stop The World）引起的暂停时间或许是最容易被忽视的。下图是优化前后Young GC暂停时间对比，从<strong>60ms左右</strong> 降到了<strong>10ms左右</strong>。</p>
 
 <p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxzr8g1cndj31250aawfv.jpg" alt="" /></p>
 
@@ -264,29 +264,29 @@
 
 <h2 id="一般优化套路">一般优化套路</h2>
 
-<p>GC优化不是一蹴而就的事情，网上有太多相关资料和推荐的GC参数，但是每个应用的类型和使用场景都不一样，所以很显然GC参数不可能对所有应用都适用。GC调优是一件很费时间的事，你需要不断尝试不断迭代最终达到你满意的效果。这里列一下一般GC优化的基本姿势：</p>
+<p>GC优化不是一蹴而就的事情，网上有太多相关资料和推荐的GC参数，但是每个应用的类型、使用场景都不一样，所以很显然同一份GC参数不可能对所有应用都适用。GC调优是一件很费时间的事，你需要不断尝试不断迭代最终达到你满意的效果。这里列一下一般GC优化的基本姿势：</p>
 
 <ol>
 <li>确定目标：延迟、吞吐量等</li>
-<li>优化参数：各种参数迭代重试</li>
-<li>验收结果：结果你满不满意？</li>
+<li>优化参数：各种参数迭代尝试</li>
+<li>验收结果：你满不满意？</li>
 </ol>
 
 <h3 id="关于前置知识">关于前置知识</h3>
 
-<p>Hotspot的基础知识，网上可谓汗牛充栋，GC优化相关的文章基本都以JVM内存区域介绍做为开头，接着是GC算法介绍，最后贴了一些GC相关的参数。因此这里就不做重复介绍了，想了解的童鞋自行Google。</p>
+<p>Hotspot的基础知识，网上可谓汗牛充栋，GC优化相关的文章基本都以JVM各内存区域介绍做为开头，接着是GC算法介绍，最后贴了一堆GC相关的参数。因此这里就不做重复介绍了，想了解的童鞋自行Google。</p>
 
 <h3 id="选择哪种gc算法">选择哪种GC算法？</h3>
 
-<p>其实现阶段Hotspot的GC并没有太多选择，JDK 8平台要么选择CMS要么G1。<a href="https://www.zhihu.com/question/24923005">R大</a>的建议是：以8G为界，8G以下的选CMS，反之选G1。</p>
+<p>其实现阶段Hotspot的GC并没有太多选择，JDK 8平台要么选择CMS要么G1。<a href="https://www.zhihu.com/question/24923005">R大</a>的建议是：以8G为界，8G以下的选CMS；反之选G1。</p>
 
 <h2 id="几个重要的参数">几个重要的参数</h2>
 
-<p>大部分的参数就不做过多介绍了，不熟悉的Google下就OK了。下面说说对Young GC可能影响较大的参数。</p>
+<p>对服务端程序来说，Young GC引起的暂停是最需要关注的，毕竟绝大部分时间Minor/Full GC并不会被触发。因此GC调优基本就变成了如何尽可能缩短Young GC的暂停时间。下面说说可能对Young GC影响较大的参数。</p>
 
 <h3 id="xx-maxtenuringthreshold-2">-XX:MaxTenuringThreshold=2</h3>
 
-<p>这或许是对Youg GC影响最大的参数了。对象在Survivor区最多熬过多少次Young GC后晋升到年老代，JDK8里CMS 默认是6，其他如G1是15。对大部分应用来说，这个值建议设得小一点，让Survivor区的内存尽早晋升到年老代。</p>
+<p>这或许是对Young GC影响最大的参数了。对象在Survivor区最多熬过多少次Young GC后晋升到年老代，JDK8里CMS 默认是6，其他如G1是15。对大部分应用来说，这个值建议设得小一点，让Survivor区的内存尽早晋升到年老代。</p>
 
 <h3 id="xx-parallelgcthreads-4-xx-concgcthreads-3">-XX:ParallelGCThreads=4 &amp; -XX:ConcGCThreads=3</h3>
 
@@ -294,7 +294,7 @@
 
 <h3 id="xx-usebiasedlocking">-XX:-UseBiasedLocking</h3>
 
-<p>偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。在安全点日志里，可以看到很多RevokeBiasd的纪录，高并发场景下建议取消。</p>
+<p>偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。在安全点日志里，可以看到很多RevokeBiased的纪录，高并发场景下建议取消。</p>
 
 <h3 id="xx-usecountedloopsafepoints">-XX:+UseCountedLoopSafepoints</h3>
 
@@ -302,7 +302,7 @@
 
 <h2 id="关于safepoint-安全点-优化">关于SafePoint（安全点）优化</h2>
 
-<p>为什么会关注这个问题呢，在我们优化GC过程中，在gc log里面总能发现比较大的GCApplicationStoppedTime，但是又不清楚到底是什么原因导致暂停的。经过一系列Google，发现Hopspot提供了安全点相关日志，能输出所有暂停引起的原因和准确时间。具体参数详见上面<code>GC安全点日志</code>部分。</p>
+<p>为什么会关注这个问题呢？在我们调优GC过程中，GC日志里总能发现比较大的GCApplicationStoppedTime，但是又不清楚到底是什么原因触发的。经过一系列Google，发现Hopspot提供了安全点相关日志选项，能输出所有暂停的原因和准确时间。具体参数详见<code>GC安全点日志</code>部分。</p>
 
 <p>不了解安全点的童鞋，先看这篇<strong>江南白衣</strong>写的文章：<a href="http://calvin1978.blogcn.com/articles/safepoint.html">JVM的Stop The World，安全点，黑暗的地底世界</a>，写得非常好，深入浅出。看完了是不是有点意犹未尽的感觉😄，应该还想问：“我大概了解了，但能不能给点实际的例子？”，OK，下面就来一个<strong><em>简单必现</em></strong>的SafePoint相关的demo：</p>
 
@@ -357,9 +357,9 @@ thread: Thread-0, costs 2234 ms
 thread: Thread-0, costs 1003 ms
 </code></pre>
 
-<p>我们启动了t1、t2两个线程，但是只有t1输入日志。从代码角度看，t1暂停时间不会超出1000ms太多，但是运行结果并不是这样，t1线程有长达<strong>5555ms</strong>的暂停😓，这显然并不是代码本身引起的，根据上面文章我们应该可以猜到大概原因：<strong>counted loop结束处未插入SafePoint代码</strong>，因为JVM认为counted loop的执行时间是不会很长的，但是现实世界中总避免不了一些大循环的代码。那么怎么强制在每一个counted loop后面插入SafePoint代码呢？JVM提供了这个参数：-XX:+UseCountedLoopSafepoints，重新跑上面demo能发现输出正常了。</p>
+<p>我们启动了t1、t2两个线程，但是只有t1会向控制台打印。从代码角度看，在一个多核机器上，理论上t1是不受t2影响的，而且t1暂停时间不会超出1000ms太多。但是运行结果并不是这样，t1线程有长达<strong>5555ms</strong>的暂停😓，这显然并不是代码本身引起的，根据上面文章我们应该可以猜到大概原因：<strong>counted loop结束处未插入SafePoint代码</strong>，因为JVM认为counted loop的执行时间是可控的，但是现实世界中总避免不了一些大循环的代码。那么怎么强制在每一个counted loop后面插入SafePoint代码呢？JVM提供了这个参数：-XX:+UseCountedLoopSafepoints，重新跑上面demo能发现输出正常了。</p>
 
-<p>在我们线上应用加了这个参数后，大部分GC暂停毛刺消失了，<strong>强烈建议</strong>所有应用都加上这个参数。</p>
+<p>在我们线上应用加了这个参数后，很多莫名其妙的GC暂停毛刺消失了，<strong>强烈建议</strong>所有应用都加上这个参数。</p>
 
 <h2 id="参考资料">参考资料</h2>
 
@@ -379,7 +379,7 @@ thread: Thread-0, costs 1003 ms
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2018-12-09</span>
+    <span class="item-content">2018-12-11</span>
   </p>
   
   <p class="copyright-item">
@@ -428,7 +428,7 @@ thread: Thread-0, costs 1003 ms
     id: '2018-12-09 15:09:26 \x2b0800 CST',
     title: '浅谈JVM GC调优',
     link: decodeURI(location.href),
-    desc: 'JVM上的GC，解放了Java程序员的生产力，使手动管理内存变成了上古武功。但Java应用动辄几十毫秒甚至秒级的暂停时间，变成了所有Java',
+    desc: 'JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦',
     owner: 'tinycedar',
     repo: 'blog',
     oauth: {
