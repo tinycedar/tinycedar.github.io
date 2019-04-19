@@ -43,15 +43,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/" />
 <meta property="article:published_time" content="2018-12-09T15:09:26&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-11T19:09:47&#43;08:00"/>
+<meta property="article:modified_time" content="2019-04-19T16:55:06&#43;08:00"/>
 
 <meta itemprop="name" content="浅谈JVM GC调优">
 <meta itemprop="description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦">
 
 
 <meta itemprop="datePublished" content="2018-12-09T15:09:26&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-11T19:09:47&#43;08:00" />
-<meta itemprop="wordCount" content="2141">
+<meta itemprop="dateModified" content="2019-04-19T16:55:06&#43;08:00" />
+<meta itemprop="wordCount" content="2064">
 
 
 
@@ -134,7 +134,7 @@
               <a href="/categories/10000-Hours/"> 10000 Hours </a>
             
           </div>
-        <span class="more-meta"> 约 2141 字 </span>
+        <span class="more-meta"> 约 2064 字 </span>
         <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -203,42 +203,13 @@
 </ul>
 
 <h3 id="1-内存相关">1. 内存相关</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-Xms1856m
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-Xms1856m
 -Xmx1856m
 -Xmn1g
 -XX:MetaspaceSize<span class="o">=</span>128m
--XX:MaxMetaspaceSize<span class="o">=</span>256m</code></pre></td></tr></table>
-</div>
-</div>
+-XX:MaxMetaspaceSize<span class="o">=</span>256m</code></pre></div>
 <h3 id="2-gc相关">2. GC相关</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseConcMarkSweepGC
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseConcMarkSweepGC
 -XX:+UseParNewGC
 -XX:MaxTenuringThreshold<span class="o">=</span><span class="m">2</span>
 -XX:CMSInitiatingOccupancyFraction<span class="o">=</span><span class="m">75</span>
@@ -251,49 +222,22 @@
 -XX:ParallelGCThreads<span class="o">=</span><span class="m">4</span>
 -XX:ConcGCThreads<span class="o">=</span><span class="m">3</span>
 -XX:-CMSClassUnloadingEnabled
--XX:-UseBiasedLocking</code></pre></td></tr></table>
-</div>
-</div>
+-XX:-UseBiasedLocking</code></pre></div>
 <h3 id="3-gc普通日志">3. GC普通日志</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-verbose:gc
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-verbose:gc
 -XX:+PrintGCDetails
 -XX:+PrintGCDateStamps
 -XX:+PrintGCApplicationStoppedTime
 -XX:+PrintPromotionFailure
--Xloggc:/<span class="o">{</span>gc_log_path<span class="o">}</span>/gc.log</code></pre></td></tr></table>
-</div>
-</div>
+-Xloggc:/<span class="o">{</span>gc_log_path<span class="o">}</span>/gc.log</code></pre></div>
 <h3 id="4-gc安全点日志">4. GC安全点日志</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseCountedLoopSafepoints
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseCountedLoopSafepoints
 -XX:+PrintSafepointStatistics
 -XX:PrintSafepointStatisticsCount<span class="o">=</span><span class="m">1</span>
 -XX:+UnlockDiagnosticVMOptions
 -XX:-DisplayVMOutput
 -XX:+LogVMOutput
--XX:LogFile<span class="o">=</span>/dev/shm/vm-<span class="o">{</span>your_app<span class="o">}</span>.log</code></pre></td></tr></table>
-</div>
-</div>
+-XX:LogFile<span class="o">=</span>/dev/shm/vm-<span class="o">{</span>your_app<span class="o">}</span>.log</code></pre></div>
 <h2 id="一般优化套路">一般优化套路</h2>
 
 <p>GC优化不是一蹴而就的事情，网上有太多相关资料和推荐的GC参数，但是每个应用的类型、使用场景都不一样，所以很显然同一份GC参数不可能对所有应用都适用。GC调优是一件很费时间的事，你需要不断尝试不断迭代最终达到你满意的效果。这里列一下一般GC优化的基本姿势：</p>
@@ -337,44 +281,7 @@
 <p>为什么会关注这个问题呢？在我们调优GC过程中，GC日志里总能发现比较大的GCApplicationStoppedTime，但是又不清楚到底是什么原因触发的。经过一系列Google，发现Hopspot提供了安全点相关日志选项，能输出所有暂停的原因和准确时间。具体参数详见<code>GC安全点日志</code>部分。</p>
 
 <p>不了解安全点的童鞋，先看这篇<strong>江南白衣</strong>写的文章：<a href="http://calvin1978.blogcn.com/articles/safepoint.html">JVM的Stop The World，安全点，黑暗的地底世界</a>，写得非常好，深入浅出。看完了是不是有点意犹未尽的感觉😄，应该还想问：“我大概了解了，但能不能给点实际的例子？”，OK，下面就来一个<strong><em>简单必现</em></strong>的SafePoint相关的demo：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestBlockingThread</span> <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestBlockingThread</span> <span class="o">{</span>
 
     <span class="kd">static</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">sleep</span> <span class="o">=</span> <span class="n">millis</span> <span class="o">-&gt;</span> <span class="o">{</span>
         <span class="k">try</span> <span class="o">{</span>
@@ -406,27 +313,9 @@
         <span class="n">sleep</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">1500L</span><span class="o">);</span>
         <span class="n">t2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
     <span class="o">}</span>
-<span class="o">}</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="o">}</span></code></pre></div>
 <p>输出结果：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">thread: Thread-0, costs <span class="m">1004</span> ms
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">thread: Thread-0, costs <span class="m">1004</span> ms
 thread: Thread-0, costs <span class="m">5555</span> ms
 thread: Thread-0, costs <span class="m">1000</span> ms
 thread: Thread-0, costs <span class="m">1003</span> ms
@@ -437,9 +326,7 @@ thread: Thread-0, costs <span class="m">1003</span> ms
 thread: Thread-0, costs <span class="m">1002</span> ms
 thread: Thread-0, costs <span class="m">1004</span> ms
 thread: Thread-0, costs <span class="m">2234</span> ms
-thread: Thread-0, costs <span class="m">1003</span> ms</code></pre></td></tr></table>
-</div>
-</div>
+thread: Thread-0, costs <span class="m">1003</span> ms</code></pre></div>
 <p>我们启动了t1、t2两个线程，但是只有t1会向控制台打印。从代码角度看，在一个多核机器上，理论上t1是不受t2影响的，而且t1暂停时间不会超出1000ms太多。但是运行结果并不是这样，t1线程有长达<strong>5555ms</strong>的暂停😓，这显然并不是代码本身引起的，根据上面文章我们应该可以猜到大概原因：<strong>counted loop结束处未插入SafePoint代码</strong>，因为JVM认为counted loop的执行时间是可控的，但是现实世界中总避免不了一些大循环的代码。那么怎么强制在每一个counted loop后面插入SafePoint代码呢？JVM提供了这个参数：-XX:+UseCountedLoopSafepoints，重新跑上面demo能发现输出正常了。</p>
 
 <p>在我们线上应用加了这个参数后，很多莫名其妙的GC暂停毛刺消失了，<strong>强烈建议</strong>所有应用都加上这个参数。</p>
@@ -463,8 +350,8 @@ thread: Thread-0, costs <span class="m">1003</span> ms</code></pre></td></tr></t
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2018-12-11
-        <a href="https://github.com/tinycedar/tinycedar.github.io/commit/7a3e579236caaf4a2890c715498589b2b0beb88d" title="misc: fix typos and adjust expression">(7a3e579)</a>
+        2019-04-19
+        <a href="https://github.com/tinycedar/tinycedar.github.io/commit/8525388fab34f2723641a9be9101b1491f88f9ec" title="misc: 升级even，增加GoogleAnalytics">(8525388)</a>
     </span>
   </p>
   

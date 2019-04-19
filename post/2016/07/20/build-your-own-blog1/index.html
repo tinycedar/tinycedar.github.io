@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2016-07-20T02:16:04&#43;08:00" />
 <meta itemprop="dateModified" content="2018-10-18T03:54:06&#43;08:00" />
-<meta itemprop="wordCount" content="5555">
+<meta itemprop="wordCount" content="5349">
 
 
 
@@ -136,8 +136,8 @@
               <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"> 环境搭建 </a>
             
           </div>
-        <span class="more-meta"> 约 5555 字 </span>
-        <span class="more-meta"> 预计阅读 12 分钟 </span>
+        <span class="more-meta"> 约 5349 字 </span>
+        <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -267,14 +267,7 @@
 <h3 id="安装git">安装Git</h3>
 
 <h4 id="mac">Mac</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">brew install git</code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">brew install git</code></pre></div>
 <h4 id="pc">PC</h4>
 
 <p>下载安装 <a href="https://git-scm.com/">Git</a> ，全用默认设置，然后打开 Git 终端。</p>
@@ -287,20 +280,10 @@
 <hr />
 
 <h3 id="设置-git-默认用户信息">设置 Git 默认用户信息</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git config --global user.name <span class="s2">&#34;tinycedar&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git config --global user.name <span class="s2">&#34;tinycedar&#34;</span>
 git config --global user.email <span class="s2">&#34;keith.mork@gmail.com&#34;</span>
 
-<span class="c1"># 使用 GitHub 注册的用户名和邮箱</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># 使用 GitHub 注册的用户名和邮箱</span></code></pre></div>
 <p>这台机器上的每个项目提交时默认都会用这些信息。</p>
 
 <hr />
@@ -330,28 +313,14 @@ git config --global user.email <span class="s2">&#34;keith.mork@gmail.com&#34;</
 <h3 id="安装">安装</h3>
 
 <h4 id="mac-1">Mac</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">brew install hugo
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">brew install hugo
 
 <span class="c1"># 查看版本</span>
 hugo version
 
 <span class="c1"># 查看帮助</span>
 man hugo
-hugo help</code></pre></td></tr></table>
-</div>
-</div>
+hugo help</code></pre></div>
 <h4 id="pc-1">PC</h4>
 
 <p>下载后解压，把 <code>hugo.exe</code> 的路径加进环境变量 <code>Path</code> 就行。</p>
@@ -361,37 +330,12 @@ hugo help</code></pre></td></tr></table>
 <h3 id="新建站点">新建站点</h3>
 
 <p>假设站点文件想放在当前目录的 <code>hugo-blog/</code> 目录下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">hugo new site -f yaml hugo-blog
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">hugo new site -f yaml hugo-blog
 
 <span class="c1"># -f, --format {yaml|json|toml}    指定 config 和 front matter 的格式，默认 toml。</span>
-<span class="c1"># 推荐 yaml 格式。</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># 推荐 yaml 格式。</span></code></pre></div>
 <p>生成的目录结构如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">cd</span> hugo-blog
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">cd</span> hugo-blog
 $ tree
 .
 ├── archetypes  <span class="c1"># 博文模板</span>
@@ -401,9 +345,7 @@ $ tree
 ├── data  <span class="c1"># 生成网站时的配置</span>
 ├── layouts  <span class="c1"># 网页框架，放在这里的文件会比主题里的同名文件优先，可以在不动主题源码的情况下覆盖部分设置。</span>
 ├── static  <span class="c1"># 静态资源，这目录下的文件会原封不动的拷到站点根目录下。</span>
-└── themes  <span class="c1"># 主题</span></code></pre></td></tr></table>
-</div>
-</div>
+└── themes  <span class="c1"># 主题</span></code></pre></div>
 <blockquote>
 <p><a href="https://gohugo.io/commands/hugo_new_site/">https://gohugo.io/commands/hugo_new_site/</a><br />
 <a href="https://gohugo.io/getting-started/directory-structure/">https://gohugo.io/getting-started/directory-structure/</a></p>
@@ -416,80 +358,21 @@ $ tree
 <p>默认不带主题，从 <a href="https://github.com/spf13/hugoThemes">这里</a> 挑喜欢的下载。</p>
 
 <p>推荐 <a href="http://www.b12.cn/article/NDI2MGIxMg.html">CR</a>（黑白极简）风格的主题，我用的是 <del><a href="https://themes.gohugo.io/steam/">Steam</a></del> <del><a href="https://themes.gohugo.io/hugo-kiera/">Kiera</a></del> <a href="https://themes.gohugo.io/hugo-theme-even/">Even</a> ：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git clone https://github.com/olOwOlo/hugo-theme-even themes/even</code></pre></div>
 <hr />
 
 <h3 id="修改配置文件">修改配置文件</h3>
 
 <p>编辑 config.yaml，默认值如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">baseURL<span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//example.org/<span class="w">  </span><span class="c"># 替换为你的网址</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">baseURL<span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//example.org/<span class="w">  </span><span class="c"># 替换为你的网址</span><span class="w">
 </span><span class="w"></span>languageCode<span class="p">:</span><span class="w"> </span>en-us<span class="w">  </span><span class="c"># 中文博客建议改为 zh-cn。如果文章内容不是这里指定的编码，Chrome 会弹出要不要翻译页面的提示。</span><span class="w">
-</span><span class="w"></span>title<span class="p">:</span><span class="w"> </span>My<span class="w"> </span>New<span class="w"> </span>Hugo<span class="w"> </span>Site<span class="w">  </span><span class="c"># 替换为你的博客标题</span></code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span>title<span class="p">:</span><span class="w"> </span>My<span class="w"> </span>New<span class="w"> </span>Hugo<span class="w"> </span>Site<span class="w">  </span><span class="c"># 替换为你的博客标题</span></code></pre></div>
 <p>【重要】建议在配置文件里指定主题，否则每次构建都要通过命令行传參。</p>
 
 <p>如果配置文件和命令行都不指定主题，打开网站只能看到一片空白。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">theme<span class="p">:</span><span class="w"> </span>even</code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">theme<span class="p">:</span><span class="w"> </span>even</code></pre></div>
 <p>常用设置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">googleAnalytics<span class="p">:</span><span class="w"> </span>XXX<span class="w">  </span><span class="c"># Google Analytics ID</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">googleAnalytics<span class="p">:</span><span class="w"> </span>XXX<span class="w">  </span><span class="c"># Google Analytics ID</span><span class="w">
 </span><span class="w"></span><span class="c"># 多数国外主题只支持 Google 的站点统计，Even 作为国人开发的主题，还支持不蒜子和百度统计。</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span>defaultContentLanguage<span class="p">:</span><span class="w"> </span>zh-cn<span class="w">  </span><span class="c"># 默认 en，文章内容的默认编码，必须用 &#34;-&#34; 和小写。有些主题支持多语言，这里的设置会改变菜单和按钮的显示语言。</span><span class="w">
@@ -520,30 +403,9 @@ $ tree
 </span><span class="w"></span><span class="c"># URL 格式，每个 key 对应 content/ 下的一级子目录。</span><span class="w">
 </span><span class="w"></span><span class="c"># :sections 代表 content/ 下的目录结构，原样映射成 URL 路径。</span><span class="w">
 </span><span class="w"></span><span class="c"># :year、:month、:day 都会从文件前缀 yyyy-mm-dd 里提取。</span><span class="w">
-</span><span class="w"></span><span class="c"># :slug 在文章的 front matter 里定义，如果没定义会用文件名。</span></code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span><span class="c"># :slug 在文章的 front matter 里定义，如果没定义会用文件名。</span></code></pre></div>
 <p>其他主题常用，但 Even 不需要的设置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">disqusShortname<span class="p">:</span><span class="w"> </span>XXX<span class="w">  </span><span class="c"># Disqus 用户名</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">disqusShortname<span class="p">:</span><span class="w"> </span>XXX<span class="w">  </span><span class="c"># Disqus 用户名</span><span class="w">
 </span><span class="w"></span><span class="c"># 静态网站只能靠第三方插件实现评论功能，很多国外主题使用 Disqus，但国内访问有点慢，有时加载不出来。</span><span class="w">
 </span><span class="w"></span><span class="c"># Even 支持 gitment，用 GitHub issue 当评论，不需要这个。</span><span class="w">
 </span><span class="w">
@@ -557,9 +419,7 @@ $ tree
 </span><span class="w"></span>pygmentsCodeFencesGuessSyntax<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="w"></span><span class="c"># https://help.farbox.com/pygments.html</span><span class="w">
 </span><span class="w"></span>pygmentsStyle<span class="p">:</span><span class="w"> </span>friendly<span class="w">  </span><span class="c"># {monokai | friendly | vs | autumn | ...}</span><span class="w">
-</span><span class="w"></span><span class="c">#pygmentsOptions: &#34;linenos=inline&#34;  # {inline | table}</span></code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span><span class="c">#pygmentsOptions: &#34;linenos=inline&#34;  # {inline | table}</span></code></pre></div>
 <p>除了 Hugo 本身的参数，每个主题都有自己特有的参数，请参考相应主题的官方文档。</p>
 
 <p>Even 可以看看官方的 <a href="https://github.com/olOwOlo/hugo-theme-even/blob/master/exampleSite/config.toml">配置文件示例</a>。</p>
@@ -577,37 +437,16 @@ $ tree
 <p>找不到匹配的 section 才会套用 <code>default.md</code>。</p>
 
 <p><code>default.md</code> 的默认 front matter：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
 </span><span class="w"></span>title<span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#39;</span><span class="w">
 </span><span class="w"></span>date<span class="p">:</span><span class="w"> </span>{{<span class="w"> </span>.Date<span class="w"> </span>}}<span class="w">
 </span><span class="w"></span>draft<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>---</code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span>---</code></pre></div>
 <p>添加常用 front matter（加在分隔符之间）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">slug<span class="p">:</span><span class="w"> </span>{{<span class="w"> </span>.TranslationBaseName<span class="w"> </span>}}<span class="w">  </span><span class="c"># URL 路径的最后一部分</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">slug<span class="p">:</span><span class="w"> </span>{{<span class="w"> </span>.TranslationBaseName<span class="w"> </span>}}<span class="w">  </span><span class="c"># URL 路径的最后一部分</span><span class="w">
 </span><span class="w"></span><span class="c"># .TranslationBaseName 为不带语言标识符的文件名。比如文件名为 foo.en.md，得到 foo</span><span class="w">
 </span><span class="w"></span>tags<span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="w"></span>categories<span class="p">:</span><span class="w"> </span><span class="p">[]</span></code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span>categories<span class="p">:</span><span class="w"> </span><span class="p">[]</span></code></pre></div>
 <p>另外 Even 主题还配置了一些特有的参数，参见它的 <a href="https://github.com/olOwOlo/hugo-theme-even/blob/master/archetypes/default.md">默认模板</a>。</p>
 
 <blockquote>
@@ -622,20 +461,10 @@ $ tree
 <p>如果对主题某些地方不满意，又不想直接改主题源文件，可以去 <code>themes/&lt;主题名&gt;/layouts/</code> 看看都有什么文件，把要改的拷到 <code>layouts/</code> 下。</p>
 
 <p>文件查找顺序大致如下，同名文件在 <code>layouts/</code> 下的比主题里的优先，匹配到 section 名的比 _default 优先。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">layouts/&lt;section&gt;/...
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">layouts/&lt;section&gt;/...
 themes/&lt;主题名&gt;/layouts/&lt;section&gt;/...
 layouts/_default/...
-themes/&lt;主题名&gt;/layouts/_default/...</code></pre></td></tr></table>
-</div>
-</div>
+themes/&lt;主题名&gt;/layouts/_default/...</code></pre></div>
 <blockquote>
 <p><a href="https://gohugo.io/templates/lookup-order/#examples-layout-lookup-for-regular-pages">https://gohugo.io/templates/lookup-order/#examples-layout-lookup-for-regular-pages</a></p>
 </blockquote>
@@ -645,18 +474,9 @@ themes/&lt;主题名&gt;/layouts/_default/...</code></pre></td></tr></table>
 <h2 id="写博客">写博客</h2>
 
 <h3 id="新建博文">新建博文</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">hugo new post/2016-07-19-first.md
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">hugo new post/2016-07-19-first.md
 
-<span class="c1"># 格式：&lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># 格式：&lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;</span></code></pre></div>
 <p>可以看到在 <code>content/</code> 下生成了 <code>post/</code> 目录，<code>post/</code> 下有 <code>2016-07-19-first.md</code> 文件。</p>
 
 <p>推荐文件名加上日期前缀，因为通常所有博文都放在同一个目录下（这样配置最简单），带日期一眼就能区分新旧文章。</p>
@@ -668,24 +488,7 @@ themes/&lt;主题名&gt;/layouts/_default/...</code></pre></td></tr></table>
 <li>section 名默认叫 <code>post</code></li>
 <li>因为上面在配置文件里已经设置了把日期前缀提取到 URL 路径，front matter 里的 slug 去掉前缀。</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="o">[[</span> -z <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;Usage: </span><span class="k">$(</span>basename <span class="s2">&#34;</span><span class="nv">$0</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2"> FILENAME(without suffix) [SECTIONNAME]&#34;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
 <span class="nv">section_name</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">post</span><span class="si">}</span>
@@ -697,72 +500,33 @@ hugo new <span class="s2">&#34;</span><span class="si">${</span><span class="nv"
 sed -i <span class="s1">&#39;.bak&#39;</span> <span class="s2">&#34;s/slug: </span><span class="si">${</span><span class="nv">date_prefix</span><span class="si">}</span><span class="s2">/slug: /&#34;</span> <span class="s2">&#34;content/</span><span class="si">${</span><span class="nv">file_path</span><span class="si">}</span><span class="s2">&#34;</span>
 rm -f <span class="s2">&#34;content/</span><span class="si">${</span><span class="nv">file_path</span><span class="si">}</span><span class="s2">.bak&#34;</span>
 
-<span class="c1"># Mac 的 sed -i 的第1个参数必须为备份文件后缀名</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># Mac 的 sed -i 的第1个参数必须为备份文件后缀名</span></code></pre></div>
 <h3 id="编辑博文">编辑博文</h3>
 
 <p>用文本编辑器打开刚才生成的文件，可以看见类似如下内容（YAML格式）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
 </span><span class="w"></span>title<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2016 07 19 First&#34;</span><span class="w">
 </span><span class="w"></span>date<span class="p">:</span><span class="w"> </span><span class="ld">2018-02-10T23:16:02</span>+<span class="m">08</span><span class="p">:</span><span class="m">00</span><span class="w">
 </span><span class="w"></span>draft<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>---</code></pre></td></tr></table>
-</div>
-</div>
+</span><span class="w"></span>---</code></pre></div>
 <p>（或默认的 TOML 格式）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="err">+++</span>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="err">+++</span>
 <span class="nx">date</span> <span class="p">=</span> <span class="s2">&#34;2016-07-19T00:12:34+08:00&#34;</span>
 <span class="nx">draft</span> <span class="p">=</span> <span class="kc">true</span>
 <span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;2016 07 19 first&#34;</span>
 
-<span class="err">+++</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="err">+++</span></code></pre></div>
 <p>像这样的出现在每篇文章前的元数据叫 <strong>front matter</strong>，<code>---</code> 之间包着的内容会解析为 YAML，<code>+++</code> 之间包着的内容会解析为 TOML。</p>
 
 <p>在下面的空白处用 <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a> 格式写正文，如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-md" data-lang="md"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-md" data-lang="md"><span class="gu">## Hello Hugo
+<div class="highlight"><pre class="chroma"><code class="language-md" data-lang="md"><span class="gu">## Hello Hugo
 </span><span class="gu"></span>
 坚持写博客的好处：
 
 <span class="k">-</span> 记录心得
 <span class="k">-</span> 整理思路
 <span class="k">-</span> 分享交流
-- 求职展示</code></pre></td></tr></table>
-</div>
-</div>
+- 求职展示</code></pre></div>
 <p>完整文件见<a href="https://raw.githubusercontent.com/tinycedar/hugo-blog/master/content/post/2016-07-19-first.md">这里</a>，渲染成 HTML 的效果见 <a href="http://tinycedar.com/post/2016/07/19/first/">这里</a>。</p>
 
 <blockquote>
@@ -776,25 +540,7 @@ rm -f <span class="s2">&#34;content/</span><span class="si">${</span><span class
 <p>放到 <code>static/</code> 下，这目录下的所有文件和目录都会原封不动的拷到站点根目录下。</p>
 
 <p>我习惯用的目录结构：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">.
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">.
 ├── CNAME
 ├── css  <span class="c1"># CSS 文件目录</span>
 ├── googleXXX.html  <span class="c1"># Google Analytics 的验证网页</span>
@@ -807,9 +553,7 @@ rm -f <span class="s2">&#34;content/</span><span class="si">${</span><span class
 │           └── <span class="m">02</span>
 │              └── <span class="m">28</span>
 ├── js  <span class="c1"># JS 脚本目录</span>
-└── robots.txt</code></pre></td></tr></table>
-</div>
-</div>
+└── robots.txt</code></pre></div>
 <p>【注意】</p>
 
 <ul>
@@ -839,20 +583,7 @@ rm -f <span class="s2">&#34;content/</span><span class="si">${</span><span class
 </ul>
 
 <p><strong>这操作经常用，建议写成脚本</strong>：（例如叫做 <code>dev_preview</code>）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="o">[[</span> -d dev <span class="o">]]</span> <span class="o">&amp;&amp;</span> rm -rf dev
 hugo server --buildDrafts --destination dev --disableFastRender
@@ -860,9 +591,7 @@ hugo server --buildDrafts --destination dev --disableFastRender
 <span class="c1"># -D, --buildDrafts[=false]    文章的默认状态是草稿，草稿默认不会构建，必须加上这参数才会生成页面。</span>
 <span class="c1"># -w, --watch    文件有改动时自动重新构建并刷新浏览器页面。（默认就带这个，不传也行）</span>
 <span class="c1"># -d, --destination DIR    输出目录。不传这参数的话构建出来的文件只会放在内存里。</span>
-<span class="c1"># --disableFastRender    有改动时触发完整构建。反正 Hugo 非常快，几百毫秒根本感觉不到。</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># --disableFastRender    有改动时触发完整构建。反正 Hugo 非常快，几百毫秒根本感觉不到。</span></code></pre></div>
 <p><code>ctrl + c</code> 结束 hugo server 。</p>
 
 <hr />
@@ -874,26 +603,7 @@ hugo server --buildDrafts --destination dev --disableFastRender
 <p>执行后会生成 <code>public/</code> 目录，可以看到之前的 Markdown 文件转换成了文件夹 + HTML 文件。</p>
 
 <p><strong>这操作经常用，建议写成脚本</strong>：（例如叫做 <code>release</code>）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="k">if</span> <span class="o">[[</span> -d public <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
     <span class="nv">GLOBIGNORE</span><span class="o">=</span>*.git
@@ -907,24 +617,13 @@ hugo
     git add -A
     git commit -m <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
     git push
-<span class="k">fi</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="k">fi</span></code></pre></div>
 <p>再用 <code>hugo server</code> 检查一下有没有 draft 忘了改，确定文章能看到就可以发布了。</p>
 
 <p>这步也可以写成脚本：（例如叫做 <code>preview</code>）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
-hugo server --disableFastRender</code></pre></td></tr></table>
-</div>
-</div>
+hugo server --disableFastRender</code></pre></div>
 <p>本地图片由于还没上传，肯定全是叉。介意的话可以先把图传上去，验证过路径都写对了才发布网页。</p>
 
 <hr />
@@ -932,20 +631,7 @@ hugo server --disableFastRender</code></pre></td></tr></table>
 <h2 id="发布到-github">发布到 GitHub</h2>
 
 <p>可以装 GitHub Desktop 或 SourceTree 等客户端，或者直接命令行：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> public
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> public
 git init
 git remote add origin <span class="s2">&#34;git@github.com:tinycedar/tinycedar.github.io.git&#34;</span>  <span class="c1"># 替换成你的 GitHub Pages 仓库地址</span>
 git add -A
@@ -953,26 +639,15 @@ git commit -m <span class="s2">&#34;first commit&#34;</span>
 git pull
 git push -u origin master
 
-<span class="c1"># 注意：要用 SSH 的仓库地址才能用公钥，如果用了 HTTPS 的仓库地址，必须每次输用户名密码。</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># 注意：要用 SSH 的仓库地址才能用公钥，如果用了 HTTPS 的仓库地址，必须每次输用户名密码。</span></code></pre></div>
 <p>之后会提示输入在 GitHub 注册的邮箱和密码。</p>
 
 <p>提交成功后，浏览器打开<code>https://tinycedar.github.io</code>，就能看到刚才的页面了。</p>
 
 <p>第一次麻烦点，之后每次提交都很简单：（已经写在上面的 release 脚本里，参数传 true 就会提交和发布）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git add -A
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git add -A
 git commit -m <span class="s2">&#34;XXX&#34;</span>
-git push</code></pre></td></tr></table>
-</div>
-</div>
+git push</code></pre></div>
 <hr />
 
 <h2 id="使用-ssh-密钥登录-github">使用 SSH 密钥登录 GitHub</h2>
@@ -982,18 +657,9 @@ git push</code></pre></td></tr></table>
 <p>前提是机器只有你一个人用。</p>
 
 <h3 id="生成ssh密钥对">生成SSH密钥对</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">mkdir ~/.ssh
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">mkdir ~/.ssh
 <span class="nb">cd</span> ~/.ssh
-ssh-keygen -t rsa -C <span class="s2">&#34;keith.mork@gmail.com&#34;</span></code></pre></td></tr></table>
-</div>
-</div>
+ssh-keygen -t rsa -C <span class="s2">&#34;keith.mork@gmail.com&#34;</span></code></pre></div>
 <ul>
 <li>提示 <code>Enter file in which to save the key</code> 时直接回车，使用默认设置。
 
@@ -1017,40 +683,15 @@ ssh-keygen -t rsa -C <span class="s2">&#34;keith.mork@gmail.com&#34;</span></cod
 <li>取个容易识别的名字，如 <code>Mac-Home</code> <code>PC-Work</code> 等，保存。</li>
 <li>测试是否成功：</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">ssh -T git@github.com  <span class="c1"># 用户名就是git，不用改。</span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># 如果报错，这样看详细信息：</span>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">ssh -T git@github.com  <span class="c1"># 用户名就是git，不用改。</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># 如果报错，这样看详细信息：</span>
 ssh -vT git@github.com
 
 <span class="c1"># 看到以下讯息就是成功了：（虽然命令返回 1）</span>
-<span class="c1"># You&#39;ve successfully authenticated, but GitHub does not provide shell access.</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="c1"># You&#39;ve successfully authenticated, but GitHub does not provide shell access.</span></code></pre></div>
 <p>看到 <code>Are you sure you want to continue connecting</code> 时输 <code>yes</code> 回车，然后就可以了。</p>
 
 <p>如果依然每次都问用户名密码，可能是当初加仓库地址时用了 HTTPS 格式，改为 SSH 格式的地址就好了：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git remote set-url origin git@github.com:tinycedar/tinycedar.github.io.git</code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git remote set-url origin git@github.com:tinycedar/tinycedar.github.io.git</code></pre></div>
 <hr />
 
 <h2 id="发布-hugo-工程源文件到-github">发布 Hugo 工程源文件到 GitHub</h2>
@@ -1061,20 +702,7 @@ ssh -vT git@github.com
 <li>在 GitHub 新建仓库，例如叫 <code>hugo-blog</code>，不要勾选创建 README.md 。</li>
 <li>在工程根目录下创建 <code>.gitignore</code> 文件，写上不需要备份的目录和文件，例：</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">public
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">public
 themes
 dev
 .git
@@ -1082,31 +710,17 @@ dev
 *.bak
 *_bak
 *.old
-*.log</code></pre></td></tr></table>
-</div>
-</div>
+*.log</code></pre></div>
 <ul>
 <li>如果想写项目简介，创建 README.md 文件。</li>
 <li>和之前类似的操作：</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">git init
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git init
 git remote add origin <span class="s2">&#34;git@github.com:tinycedar/hugo-blog.git&#34;</span>  <span class="c1"># 替换成你的 GitHub 仓库地址</span>
 git add -A
 git commit -m <span class="s2">&#34;first commit&#34;</span>
 git pull
-git push -u origin master</code></pre></td></tr></table>
-</div>
-</div>
+git push -u origin master</code></pre></div>
 <p>如果忘了写 <code>.gitignore</code>，把 public 和 themes 也提交了上去，会发现它们被认为是 submodule （因为里面有 .git 目录）。即使之后设置忽略它们，每次里面的文件有更新时都会出现烦人的子模块状态变更的记录。</p>
 
 <p>解决方法：先把那2个目录复制到别的地方，把它们删掉，写好 <code>.gitignore</code>，在 <code>.git/config</code> 里删掉 <code>[submodule]</code> 相关内容，提交，再把它们搬回来。</p>
