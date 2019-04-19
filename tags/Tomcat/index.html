@@ -16,52 +16,43 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Lin" />
-  <meta name="description" content="记录性能测试和调优的心得。" />
-  <meta name="keywords" content="load testing, tuning, 性能测试, 调优" />
+<meta name="author" content="Daniel Lin" /><meta name="description" content="记录技术的心得" /><meta name="keywords" content="Java, Go, Rust, 分布式, 服务端, 高性能" />
 
 
 
-<meta name="google-site-verification" content="0a3HFkiNXuBV7zv3VJQyVVHctAFi3N6wP3KO6o8vErw" />
+<meta name="google-site-verification" content="quT-Rc81rZsC-DZdHlfcsk4G26SQVxX1J2nu39ZN44s" />
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.56.0-DEV with even 4.0.0" />
 
 
 <link rel="canonical" href="http://tinycedar.com/tags/Tomcat/" />
-<link href="http://tinycedar.com/tags/Tomcat/index.xml" rel="alternate" type="application/rss+xml" title="Daniel&#39;s blog" />
+  <link href="http://tinycedar.com/tags/Tomcat/index.xml" rel="alternate" type="application/rss+xml" title="Daniel&#39;s blog" />
   <link href="http://tinycedar.com/tags/Tomcat/index.xml" rel="feed" type="application/rss+xml" title="Daniel&#39;s blog" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-
-
 <meta property="og:title" content="Tomcat" />
-<meta property="og:description" content="记录性能测试和调优的心得。" />
+<meta property="og:description" content="记录技术的心得" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://tinycedar.com/tags/Tomcat/" />
+
 <meta property="og:updated_time" content="2017-10-27T02:34:08&#43;08:00"/>
 
 <meta itemprop="name" content="Tomcat">
-<meta itemprop="description" content="记录性能测试和调优的心得。">
+<meta itemprop="description" content="记录技术的心得">
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tomcat"/>
-<meta name="twitter:description" content="记录性能测试和调优的心得。"/>
+<meta name="twitter:description" content="记录技术的心得"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -163,8 +154,8 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="mailto:qienlin@outlook.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/tinycedar" class="iconfont icon-github" title="github"></a>
-      <a href="https://www.douban.com/people/133443683/" class="iconfont icon-douban" title="douban"></a>
   <a href="http://tinycedar.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
@@ -180,15 +171,14 @@
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2016 - 
-    2018
+    2016 - 
+    2019
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -215,7 +205,7 @@
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-81240089-1', 'auto');
+	ga('create', 'UA-138653508-1', 'auto');
 	
 	ga('send', 'pageview');
 }
