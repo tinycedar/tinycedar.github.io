@@ -43,14 +43,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/" />
 <meta property="article:published_time" content="2018-12-09T15:09:26&#43;08:00"/>
-<meta property="article:modified_time" content="2019-04-19T16:55:06&#43;08:00"/>
+<meta property="article:modified_time" content="2019-04-19T20:01:51&#43;08:00"/>
 
 <meta itemprop="name" content="浅谈JVM GC调优">
 <meta itemprop="description" content="JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦">
 
 
 <meta itemprop="datePublished" content="2018-12-09T15:09:26&#43;08:00" />
-<meta itemprop="dateModified" content="2019-04-19T16:55:06&#43;08:00" />
+<meta itemprop="dateModified" content="2019-04-19T20:01:51&#43;08:00" />
 <meta itemprop="wordCount" content="2064">
 
 
@@ -190,9 +190,9 @@
 
 <p>XX系统，做为XXXX部门<strong>最底层</strong>、<strong>流量最大</strong>的应用，接口RT(响应时间)的重要性显而易见；而影响RT稳定性的众多因素里，GC STW（Stop The World）引起的暂停时间或许是最容易被忽视的。下图是优化前后Young GC暂停时间对比，从<strong>60ms左右</strong> 降到了<strong>10ms左右</strong>。</p>
 
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxzr8g1cndj31250aawfv.jpg" alt="" /></p>
+<p><img src="https://ae01.alicdn.com/kf/UTB8t36yM4HEXKJk43Je761eeXXaC.png" alt="" /></p>
 
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxzsg4hcqij31ws0m0ajg.jpg" alt="" /></p>
+<p><img src="https://ae01.alicdn.com/kf/UTB8pIYnMVfFXKJk43Ot760IPFXar.png" alt="" /></p>
 
 <h2 id="再看参数">再看参数</h2>
 
@@ -351,7 +351,7 @@ thread: Thread-0, costs <span class="m">1003</span> ms</code></pre></div>
     <span class="item-title">上次更新</span>
     <span class="item-content">
         2019-04-19
-        <a href="https://github.com/tinycedar/blog/commit/8525388fab34f2723641a9be9101b1491f88f9ec" title="misc: 升级even，增加GoogleAnalytics">(8525388)</a>
+        <a href="https://github.com/tinycedar/blog/commit/c80e04e95f686344e016f8e44cade0f08c1451a1" title="misc: fix typo">(c80e04e)</a>
     </span>
   </p>
   
