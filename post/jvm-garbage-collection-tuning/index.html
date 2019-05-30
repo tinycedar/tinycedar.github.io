@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>线上JVM GC调优实践 - Daniel&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Daniel Lin" /><meta name="description" content="生产环境Java虚拟机GC优化实践；JVM Garbage collector tuning in production environment" /><meta name="keywords" content="Java虚拟机, JVM GC调优实践, 虚拟机垃圾回收, GC调优, 安全点, Garbage collection tuning, GC tuning, JVM GC, SafePoint" />
+
+
+
+<meta name="google-site-verification" content="quT-Rc81rZsC-DZdHlfcsk4G26SQVxX1J2nu39ZN44s" />
+
+
+<meta name="generator" content="Hugo 0.56.0-DEV with even 4.0.0" />
+
+
+<link rel="canonical" href="http://tinycedar.com/post/jvm-garbage-collection-tuning/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="线上JVM GC调优实践" />
+<meta property="og:description" content="生产环境Java虚拟机GC优化实践；JVM Garbage collector tuning in production environment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://tinycedar.com/post/jvm-garbage-collection-tuning/" />
+<meta property="article:published_time" content="2018-12-09T15:09:26&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-09T15:09:26&#43;08:00"/>
+
+<meta itemprop="name" content="线上JVM GC调优实践">
+<meta itemprop="description" content="生产环境Java虚拟机GC优化实践；JVM Garbage collector tuning in production environment">
+
+
+<meta itemprop="datePublished" content="2018-12-09T15:09:26&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-09T15:09:26&#43;08:00" />
+<meta itemprop="wordCount" content="2064">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="线上JVM GC调优实践"/>
+<meta name="twitter:description" content="生产环境Java虚拟机GC优化实践；JVM Garbage collector tuning in production environment"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Daniel&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Daniel&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">线上JVM GC调优实践</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-09 </span>
+        <div class="post-category">
+            
+              <a href="/categories/10000-Hours/"> 10000 Hours </a>
+            
+          </div>
+        <span class="more-meta"> 约 2064 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#先看效果">先看效果</a></li>
+<li><a href="#再看参数">再看参数</a>
+<ul>
+<li><a href="#0-机器配置">0. 机器配置</a></li>
+<li><a href="#1-内存相关">1. 内存相关</a></li>
+<li><a href="#2-gc相关">2. GC相关</a></li>
+<li><a href="#3-gc普通日志">3. GC普通日志</a></li>
+<li><a href="#4-gc安全点日志">4. GC安全点日志</a></li>
+</ul></li>
+<li><a href="#一般优化套路">一般优化套路</a>
+<ul>
+<li><a href="#关于前置知识">关于前置知识</a></li>
+<li><a href="#选择哪种gc算法">选择哪种GC算法？</a></li>
+</ul></li>
+<li><a href="#几个重要的参数">几个重要的参数</a>
+<ul>
+<li><a href="#xx-maxtenuringthreshold-2">-XX:MaxTenuringThreshold=2</a></li>
+<li><a href="#xx-parallelgcthreads-4-xx-concgcthreads-3">-XX:ParallelGCThreads=4 &amp; -XX:ConcGCThreads=3</a></li>
+<li><a href="#xx-usebiasedlocking">-XX:-UseBiasedLocking</a></li>
+<li><a href="#xx-usecountedloopsafepoints">-XX:+UseCountedLoopSafepoints</a></li>
+</ul></li>
+<li><a href="#关于safepoint-安全点-优化">关于SafePoint（安全点）优化</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<p>JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦魇，也成了C/C++/Rust开发者嘲笑Java的黑点。无数次我梦想Azul家的C4算法能开源，但那可是人家的核心技术和摇钱树。终于ZGC出现了，几乎和C4一模一样的算法实现&hellip;&hellip;在等待ZGC变成stable的这段时间里，我们没办法还得老实调优GC。</p>
+
+<h2 id="先看效果">先看效果</h2>
+
+<p>XX系统，做为XXXX部门<strong>最底层</strong>、<strong>流量最大</strong>的应用，接口RT(响应时间)的重要性显而易见；而影响RT稳定性的众多因素里，GC STW（Stop The World）引起的暂停时间或许是最容易被忽视的。下图是优化前后Young GC暂停时间对比，从<strong>60ms左右</strong> 降到了<strong>10ms左右</strong>。</p>
+
+<p><img src="https://ae01.alicdn.com/kf/UTB8t36yM4HEXKJk43Je761eeXXaC.png" alt="" /></p>
+
+<p><img src="https://ae01.alicdn.com/kf/UTB8pIYnMVfFXKJk43Ot760IPFXar.png" alt="" /></p>
+
+<h2 id="再看参数">再看参数</h2>
+
+<h3 id="0-机器配置">0. 机器配置</h3>
+
+<ul>
+<li>Docker容器：4核4G</li>
+</ul>
+
+<h3 id="1-内存相关">1. 内存相关</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-Xms1856m
+-Xmx1856m
+-Xmn1g
+-XX:MetaspaceSize<span class="o">=</span>128m
+-XX:MaxMetaspaceSize<span class="o">=</span>256m</code></pre></div>
+<h3 id="2-gc相关">2. GC相关</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseConcMarkSweepGC
+-XX:+UseParNewGC
+-XX:MaxTenuringThreshold<span class="o">=</span><span class="m">2</span>
+-XX:CMSInitiatingOccupancyFraction<span class="o">=</span><span class="m">75</span>
+-XX:+UseCMSInitiatingOccupancyOnly
+-XX:+ExplicitGCInvokesConcurrent
+-XX:+ParallelRefProcEnabled
+-XX:+CMSParallelInitialMarkEnabled
+-XX:+UnlockDiagnosticVMOptions
+-XX:ParGCCardsPerStrideChunk<span class="o">=</span><span class="m">1024</span>
+-XX:ParallelGCThreads<span class="o">=</span><span class="m">4</span>
+-XX:ConcGCThreads<span class="o">=</span><span class="m">3</span>
+-XX:-CMSClassUnloadingEnabled
+-XX:-UseBiasedLocking</code></pre></div>
+<h3 id="3-gc普通日志">3. GC普通日志</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-verbose:gc
+-XX:+PrintGCDetails
+-XX:+PrintGCDateStamps
+-XX:+PrintGCApplicationStoppedTime
+-XX:+PrintPromotionFailure
+-Xloggc:/<span class="o">{</span>gc_log_path<span class="o">}</span>/gc.log</code></pre></div>
+<h3 id="4-gc安全点日志">4. GC安全点日志</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">-XX:+UseCountedLoopSafepoints
+-XX:+PrintSafepointStatistics
+-XX:PrintSafepointStatisticsCount<span class="o">=</span><span class="m">1</span>
+-XX:+UnlockDiagnosticVMOptions
+-XX:-DisplayVMOutput
+-XX:+LogVMOutput
+-XX:LogFile<span class="o">=</span>/dev/shm/vm-<span class="o">{</span>your_app<span class="o">}</span>.log</code></pre></div>
+<h2 id="一般优化套路">一般优化套路</h2>
+
+<p>GC优化不是一蹴而就的事情，网上有太多相关资料和推荐的GC参数，但是每个应用的类型、使用场景都不一样，所以很显然同一份GC参数不可能对所有应用都适用。GC调优是一件很费时间的事，你需要不断尝试不断迭代最终达到你满意的效果。这里列一下一般GC优化的基本姿势：</p>
+
+<ol>
+<li>确定目标：延迟、吞吐量等</li>
+<li>优化参数：各种参数迭代尝试</li>
+<li>验收结果：你满不满意？</li>
+</ol>
+
+<h3 id="关于前置知识">关于前置知识</h3>
+
+<p>Hotspot的基础知识，网上可谓汗牛充栋，GC优化相关的文章基本都以JVM各内存区域介绍做为开头，接着是GC算法介绍，最后贴了一堆GC相关的参数。因此这里就不做重复介绍了，想了解的童鞋自行Google。</p>
+
+<h3 id="选择哪种gc算法">选择哪种GC算法？</h3>
+
+<p>其实现阶段Hotspot的GC并没有太多选择，JDK 8平台要么选择CMS要么G1。<a href="https://www.zhihu.com/question/24923005">R大</a>的建议是：以8G为界，8G以下的选CMS；反之选G1。</p>
+
+<h2 id="几个重要的参数">几个重要的参数</h2>
+
+<p>对服务端程序来说，Young GC引起的暂停是最需要关注的，毕竟绝大部分时间Major/Full GC并不会被触发。因此GC调优基本就变成了如何尽可能缩短Young GC的暂停时间。下面说说可能对Young GC影响较大的参数。</p>
+
+<h3 id="xx-maxtenuringthreshold-2">-XX:MaxTenuringThreshold=2</h3>
+
+<p>这或许是对Young GC影响最大的参数了。对象在Survivor区最多熬过多少次Young GC后晋升到年老代，JDK8里CMS 默认是6，其他如G1是15。对大部分应用来说，这个值建议设得小一点，让Survivor区的内存尽早晋升到年老代。</p>
+
+<h3 id="xx-parallelgcthreads-4-xx-concgcthreads-3">-XX:ParallelGCThreads=4 &amp; -XX:ConcGCThreads=3</h3>
+
+<p>并发收集线程数。看具体应用和CPU核心数，建议多次迭代，选择表现最好的数据。</p>
+
+<h3 id="xx-usebiasedlocking">-XX:-UseBiasedLocking</h3>
+
+<p>偏向锁，会尝试把锁赋给第一个访问它的线程，取消同步块上的synchronized原语。在安全点日志里，可以看到很多RevokeBiased的纪录，高并发场景下建议取消。</p>
+
+<h3 id="xx-usecountedloopsafepoints">-XX:+UseCountedLoopSafepoints</h3>
+
+<p>Keeps safepoints in counted loops. Its default value is false. 强烈建议开启，具体原因详见以下部分分析。</p>
+
+<h2 id="关于safepoint-安全点-优化">关于SafePoint（安全点）优化</h2>
+
+<p>为什么会关注这个问题呢？在我们调优GC过程中，GC日志里总能发现比较大的GCApplicationStoppedTime，但是又不清楚到底是什么原因触发的。经过一系列Google，发现Hotspot提供了安全点相关日志选项，能输出所有暂停的原因和准确时间。具体参数详见<code>GC安全点日志</code>部分。</p>
+
+<p>不了解安全点的童鞋，先看这篇<strong>江南白衣</strong>写的文章：<a href="http://calvin1978.blogcn.com/articles/safepoint.html">JVM的Stop The World，安全点，黑暗的地底世界</a>，写得非常好，深入浅出。看完了是不是有点意犹未尽的感觉😄，应该还想问：“我大概了解了，但能不能给点实际的例子？”，OK，下面就来一个<strong><em>简单必现</em></strong>的SafePoint相关的demo：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestBlockingThread</span> <span class="o">{</span>
+
+    <span class="kd">static</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span> <span class="n">sleep</span> <span class="o">=</span> <span class="n">millis</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">millis</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">static</span> <span class="n">Thread</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="n">sleep</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">1000L</span><span class="o">);</span>
+            <span class="kt">long</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span><span class="o">;</span>
+            <span class="o">(</span><span class="n">cost</span> <span class="o">&gt;</span> <span class="n">1010L</span> <span class="o">?</span> <span class="n">System</span><span class="o">.</span><span class="na">err</span> <span class="o">:</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;thread: %s, costs %d ms\n&#34;</span><span class="o">,</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">(),</span> <span class="n">cost</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="kd">static</span> <span class="n">Thread</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">1000000000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">boolean</span> <span class="n">b</span> <span class="o">=</span> <span class="n">1</span><span class="o">.</span><span class="na">0</span> <span class="o">/</span> <span class="n">i</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">sleep</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">10L</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">t1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">sleep</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">1500L</span><span class="o">);</span>
+        <span class="n">t2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<p>输出结果：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">thread: Thread-0, costs <span class="m">1004</span> ms
+thread: Thread-0, costs <span class="m">5555</span> ms
+thread: Thread-0, costs <span class="m">1000</span> ms
+thread: Thread-0, costs <span class="m">1003</span> ms
+thread: Thread-0, costs <span class="m">1001</span> ms
+thread: Thread-0, costs <span class="m">1004</span> ms
+thread: Thread-0, costs <span class="m">1004</span> ms
+thread: Thread-0, costs <span class="m">1003</span> ms
+thread: Thread-0, costs <span class="m">1002</span> ms
+thread: Thread-0, costs <span class="m">1004</span> ms
+thread: Thread-0, costs <span class="m">2234</span> ms
+thread: Thread-0, costs <span class="m">1003</span> ms</code></pre></div>
+<p>我们启动了t1、t2两个线程，但是只有t1会向控制台打印。从代码角度看，在一个多核机器上，理论上t1是不受t2影响的，而且t1暂停时间不会超出1000ms太多。但是运行结果并不是这样，t1线程有长达<strong>5555ms</strong>的暂停😓，这显然并不是代码本身引起的，根据上面文章我们应该可以猜到大概原因：<strong>counted loop结束处未插入SafePoint代码</strong>，因为JVM认为counted loop的执行时间是可控的，但是现实世界中总避免不了一些大循环的代码。那么怎么强制在每一个counted loop后面插入SafePoint代码呢？JVM提供了这个参数：-XX:+UseCountedLoopSafepoints，重新跑上面demo能发现输出正常了。</p>
+
+<p>在我们线上应用加了这个参数后，很多莫名其妙的GC暂停毛刺消失了，<strong>强烈建议</strong>所有应用都加上这个参数。</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+<li>《Java性能优化权威指南》</li>
+<li>《深入理解Java虚拟机》</li>
+<li><a href="http://calvin1978.blogcn.com/articles/safepoint.html">JVM的Stop The World，安全点，黑暗的地底世界</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Daniel Lin</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-12-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+
+
+    
+    <div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/zhoushan-travel/">
+            <span class="next-text nav-default">十月舟山团建行程</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="tinycedar/tinycedar.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:qienlin@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/tinycedar" class="iconfont icon-github" title="github"></a>
+  <a href="http://tinycedar.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Daniel Lin</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+<script></script>
+<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
+<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.26188efa.min.js?v=3.1.1"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138653508-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
