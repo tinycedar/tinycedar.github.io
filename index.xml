@@ -13,38 +13,38 @@
     
     <item>
       <title>线上JVM GC调优实践</title>
-      <link>http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/</link>
+      <link>http://tinycedar.com/post/jvm-garbage-collection-tuning/</link>
       <pubDate>Sun, 09 Dec 2018 15:09:26 +0800</pubDate>
       
-      <guid>http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/</guid>
+      <guid>http://tinycedar.com/post/jvm-garbage-collection-tuning/</guid>
       <description>JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦</description>
     </item>
     
     <item>
       <title>十月舟山团建行程</title>
-      <link>http://tinycedar.com/post/2018/10/09/zhoushan-travel/</link>
+      <link>http://tinycedar.com/post/zhoushan-travel/</link>
       <pubDate>Tue, 09 Oct 2018 14:16:04 +0800</pubDate>
       
-      <guid>http://tinycedar.com/post/2018/10/09/zhoushan-travel/</guid>
+      <guid>http://tinycedar.com/post/zhoushan-travel/</guid>
       <description>行程日期 10.19（周五）自驾出发 10.20（周六）岛上游玩 10.21（周日）下午返程 重要说明 如果风大无船，延后出行。一般提前一周基本能确定</description>
     </item>
     
     <item>
       <title>BIO vs NIO vs AIO</title>
-      <link>http://tinycedar.com/post/2017/10/27/bio-vs-nio-vs-aio/</link>
+      <link>http://tinycedar.com/post/bio-vs-nio-vs-aio/</link>
       <pubDate>Fri, 27 Oct 2017 02:34:08 +0800</pubDate>
       
-      <guid>http://tinycedar.com/post/2017/10/27/bio-vs-nio-vs-aio/</guid>
-      <description>最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w</description>
+      <guid>http://tinycedar.com/post/bio-vs-nio-vs-aio/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>GitHub &#43; Hugo 搭建个人博客</title>
-      <link>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</link>
+      <link>http://tinycedar.com/post/build-your-own-blog/</link>
       <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
       
-      <guid>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</guid>
-      <description></description>
+      <guid>http://tinycedar.com/post/build-your-own-blog/</guid>
+      <description>更新： 2018-05-26：主题换成 Even，补充多处内容。 2018-02-11：主题换成 Kiera。 自己搭博客的N个理由 你的笔记非常值钱，</description>
     </item>
     
     <item>
