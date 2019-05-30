@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>浅谈JVM GC调优</title>
+      <title>线上JVM GC调优实践</title>
       <link>http://tinycedar.com/post/2018/12/09/jvm-gc-optimization/</link>
       <pubDate>Sun, 09 Dec 2018 15:09:26 +0800</pubDate>
       
@@ -44,7 +44,7 @@
       <pubDate>Wed, 20 Jul 2016 02:16:04 +0800</pubDate>
       
       <guid>http://tinycedar.com/post/2016/07/20/build-your-own-blog1/</guid>
-      <description>更新： 2018-05-26：主题换成 Even，补充多处内容。 2018-02-11：主题换成 Kiera。 自己搭博客的N个理由 你的笔记非常值钱，</description>
+      <description></description>
     </item>
     
     <item>
