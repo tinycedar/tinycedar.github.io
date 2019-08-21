@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Daniel&#39;s blog</title>
+  <title>分布式事务框架设计与实现 - Daniel&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Lin" /><meta name="description" content="记录技术的心得" /><meta name="keywords" content="Java, Go, Rust, 分布式, 服务端, 高性能" />
+<meta name="author" content="Daniel Lin" /><meta name="description" content="轻量级分布式事务框架实现；Lightweight distributed transaction framework implementation" /><meta name="keywords" content="distributed transaction, Saga, 分布式事务" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
 
 
-<link rel="canonical" href="http://tinycedar.com/" />
-  <link href="http://tinycedar.com/index.xml" rel="alternate" type="application/rss+xml" title="Daniel&#39;s blog" />
-  <link href="http://tinycedar.com/index.xml" rel="feed" type="application/rss+xml" title="Daniel&#39;s blog" />
+<link rel="canonical" href="http://tinycedar.com/post/distributed-transaction-implementation/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,18 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Daniel&#39;s blog" />
-<meta property="og:description" content="记录技术的心得" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://tinycedar.com/" />
+<meta property="og:title" content="分布式事务框架设计与实现" />
+<meta property="og:description" content="轻量级分布式事务框架实现；Lightweight distributed transaction framework implementation" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://tinycedar.com/post/distributed-transaction-implementation/" />
+<meta property="article:published_time" content="2019-08-21T21:45:39+08:00" />
+<meta property="article:modified_time" content="2019-08-21T22:54:34+08:00" />
+<meta itemprop="name" content="分布式事务框架设计与实现">
+<meta itemprop="description" content="轻量级分布式事务框架实现；Lightweight distributed transaction framework implementation">
 
-<meta property="og:updated_time" content="2019-08-21T21:45:39+08:00" />
-<meta itemprop="name" content="Daniel&#39;s blog">
-<meta itemprop="description" content="记录技术的心得">
 
+<meta itemprop="datePublished" content="2019-08-21T21:45:39&#43;08:00" />
+<meta itemprop="dateModified" content="2019-08-21T22:54:34&#43;08:00" />
+<meta itemprop="wordCount" content="67">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Daniel&#39;s blog"/>
-<meta name="twitter:description" content="记录技术的心得"/>
+<meta name="twitter:title" content="分布式事务框架设计与实现"/>
+<meta name="twitter:description" content="轻量级分布式事务框架实现；Lightweight distributed transaction framework implementation"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -115,144 +121,118 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          
-  <section id="posts" class="posts">
+          <article class="post">
     
-    
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/distributed-transaction-implementation/">分布式事务框架设计与实现</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-08-21 </span>
-      <div class="post-category">
-          <a href="/categories/10000-Hours/"> 10000 Hours </a>
+    <header class="post-header">
+      <h1 class="post-title">分布式事务框架设计与实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-21 </span>
+        <div class="post-category">
+            
+              <a href="/categories/10000-Hours/"> 10000 Hours </a>
+            
           </div>
         <span class="more-meta"> 约 67 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      今年年初建设交易中台，基于Saga模式，开发了一个轻量级的分布式事务框架。同时加入了全局锁以提高数据隔离性。 本文根据部门内部分享整理。
-    </div>
-    <div class="read-more">
-      <a href="/post/distributed-transaction-implementation/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
     
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/jvm-garbage-collection-tuning/">线上JVM GC调优实践</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-12-09 </span>
-      <div class="post-category">
-          <a href="/categories/10000-Hours/"> 10000 Hours </a>
-          </div>
-        <span class="more-meta"> 约 2064 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      JVM上的GC，解放了程序员的生产力，使内存手动管理变成了上古绝技。但Java应用动辄几十毫秒甚至秒级的暂停时间，成了所有Java开发者的梦
-    </div>
-    <div class="read-more">
-      <a href="/post/jvm-garbage-collection-tuning/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    
   </div>
-</article>
+</div>
 
     
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/zhoushan-travel/">十月舟山团建行程</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-10-09 </span>
+    
+
+    
+    <div class="post-content">
+      <p>今年年初建设交易中台，基于Saga模式，开发了一个轻量级的分布式事务框架。同时加入了全局锁以提高数据隔离性。
+本文根据部门内部分享整理。</p>
+
+<hr />
+
+<p><img src="http://ww2.sinaimg.cn/large/006y8mN6gy1g67o723flej31he0u00wb.jpg" alt="" />
+<img src="http://ww2.sinaimg.cn/large/006y8mN6gy1g67oejtqnuj31he0u0adx.jpg" alt="" />
+<img src="http://ww4.sinaimg.cn/large/006y8mN6gy1g67oekf3tkj31hf0u0424.jpg" alt="" />
+<img src="http://ww4.sinaimg.cn/large/006y8mN6gy1g67oel096ej31hn0u043t.jpg" alt="" />
+<img src="http://ww4.sinaimg.cn/large/006y8mN6gy1g67oels4xtj31hg0u0ae3.jpg" alt="" />
+<img src="http://ww1.sinaimg.cn/large/006y8mN6gy1g67oembwnoj31h90u0tet.jpg" alt="" />
+<img src="http://ww4.sinaimg.cn/large/006y8mN6gy1g67oemyoxhj31ha0u0dml.jpg" alt="" />
+<img src="http://ww2.sinaimg.cn/large/006y8mN6gy1g67oenj2ynj31hk0u0gt6.jpg" alt="" />
+<img src="http://ww3.sinaimg.cn/large/006y8mN6gy1g67oeoby61j31hy0u0q9x.jpg" alt="" />
+<img src="http://ww2.sinaimg.cn/large/006y8mN6gy1g67oeoxxauj31hu0u0dnk.jpg" alt="" />
+<img src="http://ww3.sinaimg.cn/large/006y8mN6gy1g67oepls4uj31hl0u046r.jpg" alt="" />
+<img src="http://ww3.sinaimg.cn/large/006y8mN6gy1g67oeq7v64j31hl0u00uj.jpg" alt="" /></p>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Daniel Lin</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-08-21
+        <a href="https://github.com/tinycedar/blog/commit/32b9c12f2a1a3645b8ea5b776791d66d7870e98d" title="分布式事务框架设计与实现">(32b9c12)</a>
+    </span>
+  </p>
+  
+  
+</div>
+
+
+    
+    <div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
       
-        <span class="more-meta"> 约 754 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      行程日期 10.19（周五）自驾出发 10.20（周六）岛上游玩 10.21（周日）下午返程 重要说明 如果风大无船，延后出行。一般提前一周基本能确定
-    </div>
-    <div class="read-more">
-      <a href="/post/zhoushan-travel/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
 
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bio-vs-nio-vs-aio/">BIO vs NIO vs AIO</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-10-27 </span>
-      <div class="post-category">
-          <a href="/categories/10000-Hours/"> 10000 Hours </a>
-          <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
-          </div>
-        <span class="more-meta"> 约 1369 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w
-    </div>
-    <div class="read-more">
-      <a href="/post/bio-vs-nio-vs-aio/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/build-your-own-blog/">GitHub &#43; Hugo 搭建个人博客</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-07-20 </span>
-      <div class="post-category">
-          <a href="/categories/10000-Hours/"> 10000 Hours </a>
-          <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"> 环境搭建 </a>
-          </div>
-        <span class="more-meta"> 约 5349 字 </span>
-        <span class="more-meta"> 预计阅读 11 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      更新： 2018-05-26：主题换成 Even，补充多处内容。 2018-02-11：主题换成 Kiera。 自己搭博客的N个理由 你的笔记非常值钱，
-    </div>
-    <div class="read-more">
-      <a href="/post/build-your-own-blog/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
       
-    
-      
-    
-  </section>
-  
-  <nav class="pagination">
-    
-    
-  </nav>
-
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/jvm-garbage-collection-tuning/">
+            <span class="next-text nav-default">线上JVM GC调优实践</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+  
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="tinycedar/tinycedar.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>

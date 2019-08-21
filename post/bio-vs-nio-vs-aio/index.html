@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Daniel Lin" /><meta name="description" content="" /><meta name="keywords" content="Java, Go, Rust, 分布式, 服务端, 高性能" />
+<meta name="author" content="Daniel Lin" /><meta name="description" content="最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w" /><meta name="keywords" content="Java, Go, Rust, 分布式, 服务端, 高性能" />
 
 
 
 <meta name="google-site-verification" content="quT-Rc81rZsC-DZdHlfcsk4G26SQVxX1J2nu39ZN44s" />
 
 
-<meta name="generator" content="Hugo 0.56.0-DEV with even 4.0.0" />
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://tinycedar.com/post/bio-vs-nio-vs-aio/" />
@@ -39,26 +39,25 @@
 
 
 <meta property="og:title" content="BIO vs NIO vs AIO" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://tinycedar.com/post/bio-vs-nio-vs-aio/" />
-<meta property="article:published_time" content="2017-10-27T02:34:08&#43;08:00"/>
-<meta property="article:modified_time" content="2018-10-18T16:22:59&#43;08:00"/>
-
+<meta property="article:published_time" content="2017-10-27T02:34:08+08:00" />
+<meta property="article:modified_time" content="2018-10-18T16:22:59+08:00" />
 <meta itemprop="name" content="BIO vs NIO vs AIO">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w">
 
 
 <meta itemprop="datePublished" content="2017-10-27T02:34:08&#43;08:00" />
 <meta itemprop="dateModified" content="2018-10-18T16:22:59&#43;08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="1369">
 
 
 
 <meta itemprop="keywords" content="IO,Tomcat,Java," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="BIO vs NIO vs AIO"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +135,8 @@
               <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
             
           </div>
-        <span class="more-meta"> 约 0 字 </span>
-        <span class="more-meta"> 预计阅读 0 分钟 </span>
+        <span class="more-meta"> 约 1369 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -181,21 +180,21 @@
 <h3 id="blocking-i-o">Blocking I/O</h3>
 
 <p>JDK 4.0以前只有BIO的API，通常我们写Client/Server程序都会这么写：</p>
-<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">ServerSocket</span> <span class="n">ss</span> <span class="o">=</span> <span class="n">createServerSocket</span><span class="o">();</span>
-<span class="n">ss</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="n">8080</span><span class="o">));</span>
-<span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-	<span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
-	<span class="n">handle</span><span class="o">(</span><span class="n">socket</span><span class="o">);</span>
-<span class="o">}</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">ServerSocket</span> <span class="nf">ss</span> <span class="o">=</span> <span class="n">createServerSocket</span><span class="p">();</span>
+<span class="n">ss</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">8080</span><span class="p">));</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+	<span class="n">Socket</span> <span class="nf">socket</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+	<span class="n">handle</span><span class="p">(</span><span class="n">socket</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
 <p>一般在handle中会通过read()方法读取客户端请求数据，但如果I/O还未read ready，那么read()方法就会阻塞，那么上述代码会造成所有其它客户端请求全部无法处理，这会严重影响响应速度和吞吐量。</p>
 
 <p>那么怎么解决这个问题呢？用multi-threading：</p>
-<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">ServerSocket</span> <span class="n">ss</span> <span class="o">=</span> <span class="n">createServerSocket</span><span class="o">();</span>
-<span class="n">ss</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="n">8080</span><span class="o">));</span>
-<span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-	<span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
-	<span class="k">new</span> <span class="n">Handler</span><span class="o">(</span><span class="n">socket</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-<span class="o">}</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">ServerSocket</span> <span class="nf">ss</span> <span class="o">=</span> <span class="n">createServerSocket</span><span class="p">();</span>
+<span class="n">ss</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">8080</span><span class="p">));</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+	<span class="n">Socket</span> <span class="nf">socket</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+	<span class="k">new</span> <span class="n">Handler</span><span class="p">(</span><span class="n">socket</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
 <p>Handler为一个thread对象，此时每一个请求对应一个thread，即使有很多线程处于阻塞状态，也不会影响其它线程。但是由于线程的创建和销毁需要占用很多资源，所以上述代码可以用thread-pool来改进，这样就能有效利用、回收线程。
 线程池的大小很关键：如果较小，客户端请求数大于线程池的部分只能排队等待；如果较大，context switch会占用很多时间，一次大概30,000 ns，也就意味着如果有1万个线程，至少需要300 ms后才能处理一遍所有线程，这样有点得不偿失。</p>
 
@@ -204,37 +203,37 @@
 <p>JDK 4.0正式引入NIO API；JDK中NIO其实指的是New I/O，既包括普通文件I/O也有针对网络I/O，目前我们只讨论网络I/O。Selector/Channel确实达到了non-blocking的目标，虽然本质上其还是同步而非异步，但是还是通过I/O多路复用基本实现了非阻塞的目标。</p>
 
 <p>不同平台底层对Selector/Channel的实现不同，Windows基于IOCP，Linux Kernel基于select/poll或epoll，FreeBSD基于kqueue等等。不同平台的JDK的Selector/Channel有着不同的实现，但是提供给我们的接口一致。</p>
-<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
-<span class="n">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="n">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
-<span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
-	<span class="n">Iterator</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
-	<span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
-    		<span class="n">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-		<span class="k">new</span> <span class="n">Handler</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-	<span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">Selector</span> <span class="nf">selector</span> <span class="o">=</span> <span class="n">Selector</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+<span class="n">SelectionKey</span> <span class="nf">key</span> <span class="o">=</span> <span class="n">channel</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_READ</span><span class="p">);</span>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">selector</span><span class="p">.</span><span class="na">select</span><span class="p">();</span>
+	<span class="n">Iterator</span> <span class="nf">iterator</span> <span class="o">=</span> <span class="n">selector</span><span class="p">.</span><span class="na">selectedKeys</span><span class="p">().</span><span class="na">iterator</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span> <span class="p">{</span>
+    		<span class="n">SelectionKey</span> <span class="nf">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+		<span class="k">new</span> <span class="n">Handler</span><span class="p">(</span><span class="n">key</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>上述代码只用一个线程就能实现处理所有客户端的请求。注意Selector的select()方法为同步方法，如果当前没有I/O ready就会一直阻塞在那里，一旦只要有一个ready，就会返回并执行下面的代码。相比于BIO，Handler线程永远只处理I/O ready的客户端请求，这样大幅度提高了吞吐量。近年来比较火的Mina/Netty和Node.js底层也是类似的实现。</p>
 
 <h3 id="asynchronous-i-o">Asynchronous I/O</h3>
 
 <p>JDK 7.0开始引入AIO API，不再需要轮询，这是真正的异步实现：</p>
-<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">AsynchronousServerSocketChannel</span> <span class="n">listener</span> <span class="o">=</span> <span class="n">AsynchronousServerSocketChannel</span>
-				<span class="o">.</span><span class="na">open</span><span class="o">();</span>
-		<span class="n">listener</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="o">(</span><span class="n">8080</span><span class="o">));</span>
-		<span class="n">listener</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span>
-				<span class="k">new</span> <span class="n">CompletionHandler</span><span class="o">&lt;</span><span class="n">AsynchronousSocketChannel</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;()</span> <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-Java" data-lang="Java"><span class="n">AsynchronousServerSocketChannel</span> <span class="nf">listener</span> <span class="o">=</span> <span class="n">AsynchronousServerSocketChannel</span>
+				<span class="p">.</span><span class="na">open</span><span class="p">();</span>
+		<span class="n">listener</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span> <span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">8080</span><span class="p">));</span>
+		<span class="n">listener</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span>
+				<span class="k">new</span> <span class="n">CompletionHandler</span><span class="o">&lt;</span><span class="n">AsynchronousSocketChannel</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 					<span class="nd">@Override</span>
-					<span class="kd">public</span> <span class="kt">void</span> <span class="nf">completed</span><span class="o">(</span><span class="n">AsynchronousSocketChannel</span> <span class="n">result</span><span class="o">,</span>
-							<span class="n">Object</span> <span class="n">attachment</span><span class="o">)</span> <span class="o">{</span>
+					<span class="kd">public</span> <span class="nf">void</span> <span class="n">completed</span><span class="p">(</span><span class="n">AsynchronousSocketChannel</span> <span class="nf">result</span><span class="p">,</span>
+							<span class="n">Object</span> <span class="nf">attachment</span><span class="p">)</span> <span class="p">{</span>
 						<span class="c1">// handle result
-</span><span class="c1"></span>					<span class="o">}</span>
+</span><span class="c1"></span>					<span class="p">}</span>
 
 					<span class="nd">@Override</span>
-					<span class="kd">public</span> <span class="kt">void</span> <span class="nf">failed</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">exc</span><span class="o">,</span> <span class="n">Object</span> <span class="n">attachment</span><span class="o">)</span> <span class="o">{</span>
+					<span class="kd">public</span> <span class="nf">void</span> <span class="n">failed</span><span class="p">(</span><span class="n">Throwable</span> <span class="nf">exc</span><span class="p">,</span> <span class="n">Object</span> <span class="nf">attachment</span><span class="p">)</span> <span class="p">{</span>
 						<span class="c1">// handle fail
-</span><span class="c1"></span>					<span class="o">}</span>
-				<span class="o">});</span></code></pre></div>
+</span><span class="c1"></span>					<span class="p">}</span>
+				<span class="p">});</span></code></pre></div>
 <p>这几天打算在Tomcat里加上AIO Connector的实现。</p>
 
     </div>

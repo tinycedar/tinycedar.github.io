@@ -6,10 +6,19 @@
     <description>Recent content on Daniel&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Dec 2018 15:09:26 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Aug 2019 21:45:39 +0800</lastBuildDate>
     
 	<atom:link href="http://tinycedar.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式事务框架设计与实现</title>
+      <link>http://tinycedar.com/post/distributed-transaction-implementation/</link>
+      <pubDate>Wed, 21 Aug 2019 21:45:39 +0800</pubDate>
+      
+      <guid>http://tinycedar.com/post/distributed-transaction-implementation/</guid>
+      <description>今年年初建设交易中台，基于Saga模式，开发了一个轻量级的分布式事务框架。同时加入了全局锁以提高数据隔离性。 本文根据部门内部分享整理。</description>
+    </item>
     
     <item>
       <title>线上JVM GC调优实践</title>
@@ -35,7 +44,7 @@
       <pubDate>Fri, 27 Oct 2017 02:34:08 +0800</pubDate>
       
       <guid>http://tinycedar.com/post/bio-vs-nio-vs-aio/</guid>
-      <description></description>
+      <description>最近在看Tomcat 7.0的源码，一直对Tomcat以下几块比较感兴趣： - 容器的架构和各组件的启动过程 - 容器Deploy一个Servlet w</description>
     </item>
     
     <item>

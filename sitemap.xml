@@ -3,31 +3,42 @@
   
   <url>
     <loc>http://tinycedar.com/categories/10000-Hours/</loc>
-    <lastmod>2018-12-09T15:09:26+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-08-21T22:54:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/categories/</loc>
-    <lastmod>2018-12-09T15:09:26+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-08-21T22:54:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/</loc>
-    <lastmod>2018-12-09T15:09:26+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-08-21T22:54:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/post/</loc>
-    <lastmod>2018-12-09T15:09:26+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-08-21T22:54:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://tinycedar.com/post/distributed-transaction-implementation/</loc>
+    <lastmod>2019-08-21T22:54:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/post/jvm-garbage-collection-tuning/</loc>
-    <lastmod>2018-12-09T15:09:26+08:00</lastmod>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -49,62 +60,71 @@
   <url>
     <loc>http://tinycedar.com/tags/IO/</loc>
     <lastmod>2018-10-18T16:22:59+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/Java/</loc>
     <lastmod>2018-10-18T16:22:59+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/</loc>
-    <lastmod>2018-10-18T16:22:59+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/Tomcat/</loc>
     <lastmod>2018-10-18T16:22:59+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2018-10-18T16:22:59+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/Git/</loc>
-    <lastmod>2016-07-20T02:16:04+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/GitHub/</loc>
-    <lastmod>2016-07-20T02:16:04+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/post/build-your-own-blog/</loc>
-    <lastmod>2016-07-20T02:16:04+08:00</lastmod>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/tags/Hugo/</loc>
-    <lastmod>2016-07-20T02:16:04+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://tinycedar.com/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2016-07-20T02:16:04+08:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-05-30T11:00:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
